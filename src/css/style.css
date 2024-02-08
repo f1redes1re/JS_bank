@@ -1,0 +1,908 @@
+/* global */
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+  font-style: normal;
+  background-color: var(--color-white);
+  margin: 0;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local(''),
+    url('../assets/fonts/Roboto-Regular.woff2') format('woff2'),
+    url('../assets/fonts/Roboto-Regular.woff') format('woff');
+}
+
+.container {
+  display: flex;
+  max-width: 1440px;
+  height: auto;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.container__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.container__body {
+  display: flex;
+  flex-direction: column;
+}
+
+.list-reset {
+  padding: 0;
+  list-style: none;
+}
+
+.loader-for-sum {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  --bs-spinner-width: 1.5rem;
+  --bs-spinner-height: 1.5rem;
+}
+
+.spinner-wrap-custom {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.waiting-cursor {
+  cursor: wait;
+}
+
+:root {
+
+  /* fonts */
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* colors-brand */
+  --color-brand-primary: #116ACC;
+  --color-brand-secondary1: #182233;
+  --color-brand-secondary2: #B3CEE2;
+  --color-brand-secondary3: #D9DDE7;
+  --color-brand-secondary4: #FD4E5D;
+
+  /* colors-gray */
+  --color-black: #000000;
+  --color-gray-gray1: #1F2937;
+  --color-gray-gray2: #374151;
+  --color-gray-gray3: #4B5563;
+  --color-gray-gray4: #6B7280;
+  --color-gray-gray5: #9CA3AF;
+  --color-gray-gray6: #D1D5DB;
+  --color-gray-gray7: #F3F4F6;
+  --color-white: #FFFFFF;
+
+  /* colors-state */
+  --color-state-info: #A0C3FF;
+  --color-state-success: #76CA66;
+  --color-state-warning: #FBC756;
+  --color-state-error: #BA0000;
+}
+
+/* header */
+
+.header {
+  display: flex;
+  height: 100px;
+  padding: 50px;
+  margin-bottom: 44px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--color-brand-primary);
+  box-shadow: 0px 5px 20px 0px #00000040;
+}
+
+.header__logo {
+  display: block;
+  width: fit-content;
+  height: fit-content;
+}
+
+.header__ref-container {
+  display: flex;
+}
+
+.header__ref-item {
+  font-weight: var(--fw-medium);
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-brand-primary);
+  padding: 16px 24px;
+  margin-right: 25px;
+  background-color: var(--color-white);
+  border: 2px solid var(--color-brand-primary);
+  border-radius: 7px;
+}
+
+.header__ref-item:last-child {
+  margin-right: 0;
+}
+
+.header__ref-item:hover {
+  color: var(--color-brand-primary);
+  background-color: var(--color-state-info);
+}
+
+.header__ref-item-selected {
+  color: var(--color-brand-primary);
+  background-color: var(--color-state-info);
+}
+
+/* main__HTML */
+
+.main__window-form {
+  display: flex;
+  width: 500px;
+  height: 366px;
+  padding: 50px 85px 50px 115px;
+  flex-direction: column;
+  align-self: center;
+  margin: 0 auto;
+  border-radius: 50px;
+  background-color: var(--color-gray-gray7);
+}
+
+.main__window-header {
+  font-weight: var(--fw-bold);
+  font-size: 32px;
+  line-height: 40px;
+  margin: 0;
+  margin-bottom: 35px;
+}
+
+.main__window-input-container {
+  position: relative;
+  display: block;
+}
+
+.main__window-label {
+  position: absolute;
+  top: 10px;
+  left: -70px;
+  font-weight: var(--fw-medium);
+}
+
+.main__window-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 7px;
+  border: 1px solid var(--color-gray-gray5);
+}
+
+.main__window-btn {
+  width: 90px;
+  height: 48px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-white);
+  padding: 14px 21px;
+  background-color: var(--color-brand-primary);
+  text-align: center;
+}
+
+/* Личный кабинет */
+
+.main__account-top {
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 50px;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.main__acc-form {
+  position: relative;
+  display: flex;
+  width: 300px;
+  z-index: 10;
+}
+
+.main__acc-header {
+  font-weight: var(--fw-bold);
+  font-size: 34px;
+  line-height: 40px;
+  color: var(--color-black);
+  margin: 0;
+  margin-right: 35px;
+  vertical-align: middle;
+}
+
+.main__acc-select {
+  width: 100%;
+}
+
+.main__account-top-left {
+  display: flex;
+  height: 100%;
+}
+
+/* Кнопка сортировки */
+
+.main__acc-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.main__acc-form-btn {
+  font-weight: var(--fw-regular);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-gray-gray2);
+  padding: 8px 16px;
+  margin-bottom: 2px;
+  text-align: left;
+  border: 1px solid var(--color-brand-primary);
+  background-color: var(--color-white);
+  background-repeat: no-repeat;
+  background-position: center right 19px;
+}
+
+.main__acc-form-btn-closed {
+  background-image: url("data:image/svg+xml,%3Csvg width='11' height='6' viewBox='0 0 11 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.951904 0.5L5.9519 5.5L10.9519 0.5L0.951904 0.5Z' fill='%23182233'/%3E%3C/svg%3E%0A");
+}
+
+.main__acc-form-btn-opened {
+  background-image: url("data:image/svg+xml,%3Csvg width='11' height='6' viewBox='0 0 11 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10.9519 5.5L5.9519 0.5L0.951904 5.5L10.9519 5.5Z' fill='%23182233'/%3E%3C/svg%3E%0A");
+}
+
+.main__acc-form-btn:hover,
+.main__acc-form-btn:focus {
+  color: var(--color-gray-gray2);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-brand-primary);
+}
+
+.main__acc-ul-selection {
+  position: absolute;
+  top: 42px;
+  display: none;
+  width: inherit;
+  font-weight: var(--fw-regular);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-gray-gray2);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: var(--color-white);
+  box-shadow: 0px 5px 20px 0px #00000040;
+  z-index: 5;
+}
+
+.main__acc-list-item {
+  border: none;
+  transition: all .1s ease-in-out;
+  cursor: pointer;
+}
+
+.main__acc-list-item:first-child,
+.main__acc-list-item:last-child {
+  border-radius: 0px;
+}
+
+.main__acc-list-item:hover,
+.main__acc-list-item:focus {
+  background-color: var(--color-state-info);
+}
+
+.main__acc-list-item:focus {
+  border: none;
+  outline: none;
+}
+
+.main__acc-list-item-selected {
+  background-position: center right 11px;
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg width='18' height='14' viewBox='0 0 18 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.00003 11.17L1.83003 7.00003L0.410034 8.41003L6.00003 14L18 2.00003L16.59 0.590027L6.00003 11.17Z' fill='%23182233'/%3E%3C/svg%3E%0A");
+}
+
+/* Список счетов */
+
+.main__account-top-right {
+  display: flex;
+  width: max-content;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: right;
+}
+
+.main__acc-add-btn {
+  display: flex;
+  width: 100%;
+  height: 52px;
+  font-weight: var(--fw-medium);
+  font-size: 16px;
+  line-height: 20px;
+  padding: 17px 24px 15px 55px;
+  align-items: center;
+  background-color: var(--color-brand-primary);
+  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 4.00001L12 12M12 12L12 20M12 12L20 12M12 12L4 12' stroke='white' stroke-width='2'/%3E%3C/svg%3E%0A");
+  background-repeat: no-repeat;
+  background-position: left 24px center;
+}
+
+.main__account-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.main__account-list-item {
+  position: relative;
+  display: flex;
+  width: 400px;
+  height: 156px;
+  padding: 22px;
+  margin-right: 70px;
+  margin-bottom: 50px;
+  border-radius: 9px;
+  flex-direction: column;
+  box-shadow: 0px 5px 20px 0px #00000040;
+  z-index: 2;
+}
+
+.main__account-list-item:nth-child(3n) {
+  margin-right: 0;
+}
+
+.main__account-list-item-header {
+  font-family: 'Roboto', sans-serif;
+  font-weight: var(--fw-medium);
+  font-size: 18px;
+  line-height: 22px;
+  color: var(--color-brand-secondary1);
+}
+
+.main__account-list-item-balance {
+  font-weight: var(--fw-regular);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-brand-secondary1);
+  margin-bottom: auto;
+}
+
+.main__account-list-item-lasttrans {
+  font-size: 13px;
+  line-height: 15px;
+  color: var(--color-black);
+  margin-bottom: 0;
+}
+
+.main__account-list-item-lasttrans-text {
+  font-weight: var(--fw-bold);
+}
+
+.main__account-list-item-lasttrans-data {
+  font-weight: var(--fw-regular);
+}
+
+.main__account-list-item-btn {
+  position: absolute;
+  right: 22px;
+  bottom: 22px;
+  display: block;
+  width: 110px;
+  height: 52px;
+  z-index: 0;
+}
+
+/* Стилизация для отдельного счета */
+
+.main__account-middle {
+  display: flex;
+  height: auto;
+  margin-bottom: 50px;
+  z-index: 1;
+}
+
+.main__account-middle-left {
+  margin-right: 49px;
+}
+
+.main__account-middle-right {
+  width: 703px;
+  padding: 50px;
+  border-radius: 50px;
+  background-color: #E5E5E5;
+}
+
+.main__acc-num {
+  display: block;
+  font-weight: var(--fw-regular);
+  font-size: 34px;
+  line-height: 40px;
+  color: var(--color-black);
+}
+
+.main__btn-back {
+  display: flex;
+  width: 209px;
+  height: 52px;
+  font-weight: var(--fw-medium);
+  font-size: 16px;
+  line-height: 20px;
+  padding: 16px 24px 16px 55px;
+  margin-bottom: 33px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  background-repeat: no-repeat;
+  background-position: center left 28px;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='12' viewBox='0 0 16 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.83 5L7.41 1.41L6 0L0 6L6 12L7.41 10.59L3.83 7L16 7V5L3.83 5Z' fill='white'/%3E%3C/svg%3E%0A");
+}
+
+.main__acc-balance-container {
+  position: relative;
+}
+
+.main__acc-balance-text {
+  font-weight: var(--fw-bold);
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--color-black);
+  margin-right: 50px;
+}
+
+.main__acc-balance-sum {
+  font-weight: var(--fw-regular);
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--color-black);
+}
+
+.main__form-money-transfer {
+  position: relative;
+  display: flex;
+  width: 606px;
+  min-height: auto;
+  padding: 25px 50px;
+  margin-right: 50px;
+  flex-direction: column;
+  border-radius: 50px;
+  background-color: var(--color-gray-gray7);
+}
+
+.main__form-money-transfer-header {
+  margin-bottom: 25px;
+}
+
+.main__form-fields-container {
+  position: relative;
+  display: flex;
+  margin-bottom: 25px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.receiver__sending-label {
+  width: fit-content;
+  font-family: 'Ubuntu', serif;
+  font-weight: var(--fw-medium);
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-black);
+  margin-right: 18px;
+}
+
+.receiver__sending-input {
+  display: inline-block;
+  width: 300px;
+  padding: 8px 16px;
+  border: 1px solid var(--color-gray-gray5);
+  border-radius: 7px;
+}
+
+.receiver__sending-input-acc-num {
+  position: relative;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center right 23px;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0.5L5 5.5L10 0.5H0Z' fill='%23182233'/%3E%3C/svg%3E%0A");
+}
+
+.send-btn {
+  position: absolute;
+  right: 186px;
+  bottom: 25px;
+  display: flex;
+  width: 164px;
+  height: 52px;
+  font-weight: var(--fw-medium);
+  font-size: 16px;
+  line-height: 20px;
+  padding: 16px 24px 16px 52px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  background-color: var(--color-brand-primary);
+  background-repeat: no-repeat;
+  background-position: center left 26px;
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='16' viewBox='0 0 20 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18 16H2C0.89543 16 0 15.1046 0 14V1.913C0.0466084 0.842547 0.928533 -0.00101428 2 -9.95438e-07H18C19.1046 -9.95438e-07 20 0.89543 20 2V14C20 15.1046 19.1046 16 18 16ZM2 3.868V14H18V3.868L10 9.2L2 3.868ZM2.8 2L10 6.8L17.2 2H2.8Z' fill='white'/%3E%3C/svg%3E%0A");
+}
+
+.receiver__saved-acc-list {
+  position: absolute;
+  top: 45px;
+  left: 206px;
+  width: 300px;
+  height: 160px;
+  z-index: 10;
+  overflow-y: scroll;
+}
+
+.receiver__saved-acc-list-item {
+  cursor: pointer;
+}
+
+/* CHART-BAR */
+
+.main__chart-wrapper {
+  display: inline-block;
+  height: 288px;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0px 5px 20px 0px #00000040;
+  cursor: pointer;
+}
+
+.main__chart-wrapper-small {
+  width: 684px;
+}
+
+.main__chart-wrapper-wide {
+  width: 100%;
+}
+
+.main__chart-bar-wide {
+  width: 100%;
+}
+
+/* Список транзакций */
+
+.main__transactions-container {
+  padding: 25px 50px;
+  border-radius: 56px;
+  background-color: var(--color-gray-gray7);
+}
+
+.main__transactions-header {
+  font-weight: var(--fw-bold);
+  font-size: 20px;
+  line-height: 24px;
+  margin-bottom: 25px;
+}
+
+.main__transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+  cursor: pointer;
+}
+
+.main__trasactions-table-th {
+  font-family: 'Ubuntu', serif;
+  font-weight: var(--fw-medium);
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--color-white);
+  padding: 20px;
+  background-color: var(--color-brand-primary);
+}
+
+.main__transactions-table thead tr:first-child th:first-child {
+  padding-left: 49px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+.main__transactions-table thead tr:first-child th:last-child {
+  padding-right: 49px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.main__transactions-table-td {
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--color-brand-primary);
+}
+
+/* Валютный обмен */
+
+.main__account-curr-container {
+  width: 588px;
+  height: auto;
+  padding: 50px;
+  margin-bottom: 44px;
+  border-radius: 50px;
+  box-shadow: 0px 5px 20px 0px #00000040;
+}
+
+.main__account-curr-list-header {
+  font-weight: var(--fw-bold);
+  font-size: 20px;
+  line-height: 23px;
+  margin: 0;
+  margin-bottom: 25px;
+}
+
+.main__account-curr-list {
+  width: 100%;
+}
+
+.main__account-curr-list-item-int-wrap {
+  position: relative;
+  margin: 0;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.main__account-curr-list-item-currency-name,
+.main__account-curr-list-item-currency-value {
+  background-color: var(--color-white);
+  z-index: 1;
+}
+
+.main__account-curr-list-item-currency-name {
+  font-weight: var(--fw-semibold);
+  padding-right: 5px;
+}
+
+.main__account-curr-list-item-currency-value {
+  padding-left: 5px;
+}
+
+.main__account-curr-list-item-int-wrap::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 27%;
+  transform: translateY(-50%);
+  height: 1px;
+  background-image: repeating-linear-gradient(90deg, #000, #000 2px, transparent 2px, transparent 4px);
+  z-index: 0;
+}
+
+/* Форма обмена валют */
+
+.main__exchange-form-container {
+  width: 100%;
+  padding: 50px 50px 62px 50px;
+  border-radius: 50px;
+  box-shadow: 0px 5px 20px 0px #00000040;
+}
+
+.main__exchange-form-header {
+  font-size: 20px;
+  font-weight: var(--fw-bold);
+  line-height: 23px;
+  margin: 0;
+  margin-bottom: 25px;
+  color: var(--color-black);
+}
+
+.main__exchange-form-currcheck-wrap {
+  width: 100%;
+  margin: 0;
+  margin-right: 25px;
+}
+
+.main__exchange-form-currcheck-wrap-top {
+  margin: 0;
+  margin-bottom: 25px;
+}
+
+.main__exchange-form-currcheck-wrap-bottom {
+  position: relative;
+}
+
+.main__exchange-form-currcheck-label-text {
+  font-size: 16px;
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+  color: var(--color-black);
+  margin-right: 20px;
+}
+
+.main__exchange-form-currcheck-label-text-sum {
+  margin: 0;
+  margin-right: 8px;
+}
+
+.main__exchange-form-currcheck-change-selection-wrap {
+  position: relative;
+}
+
+.main__exchange-form-currcheck-change-selection-wrap-from {
+  margin-right: 20px;
+}
+
+.main__exchange-form-currcheck-change-select-btn {
+  width: 134px;
+  height: 44px;
+  padding: 8px 16px;
+  text-align: left;
+  border-radius: 7px;
+  border: 1px solid var(--color-gray-gray5);
+  background-color: var(--color-white);
+  background-repeat: no-repeat;
+  background-position: center right 23px;
+}
+
+.main__exchange-form-currcheck-change-select-btn:hover,
+.main__exchange-form-currcheck-change-select-btn:focus,
+.main__exchange-form-currcheck-change-select-btn:active {
+  border: 1px solid var(--color-gray-gray5);
+}
+
+.main__exchange-form-currcheck-change-ul-selection {
+  position: absolute;
+  top: 44px;
+  left: auto;
+  right: 0;
+  width: 134px;
+  height: 130px;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.main__exchange-form-currcheck-change-ul-selection-item {
+  cursor: pointer;
+  transition: background-color .1s ease-in-out;
+}
+
+.main__exchange-form-currcheck-change-ul-selection-item:hover {
+  background-color: var(--color-state-info);
+}
+
+.main__exchange-form-currcheck-change-ul-selection-item-selected {
+  background-position: center right 11px;
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg width='18' height='14' viewBox='0 0 18 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.00003 11.17L1.83003 7.00003L0.410034 8.41003L6.00003 14L18 2.00003L16.59 0.590027L6.00003 11.17Z' fill='%23182233'/%3E%3C/svg%3E%0A");
+}
+
+.main__exchange-form-currcheck-bottom-result {
+  width: 300px;
+  height: 44px;
+  font-weight: var(--fw-regular);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-black);
+  padding: 8px 16px;
+  border-radius: 7px;
+  border: 1px solid var(--color-gray-gray5);
+  background-color: var(--color-white);
+}
+
+/* Форма отображения динамики цен на валюты */
+
+.main__curr-change-list-header {
+  font-size: 20px;
+  font-weight: var(--fw-bold);
+  line-height: 23px;
+  margin: 0;
+  margin-bottom: 25px;
+}
+
+.main__curr-change-list-item {
+  height: 22px;
+  margin-bottom: 25px;
+}
+
+.main__curr-change-list-item-int-wrap {
+  position: relative;
+  padding-right: 25px;
+  background-repeat: no-repeat;
+  background-position: center right;
+}
+
+.main__curr-change-list-item-currency-dots {
+  content: '';
+  position: absolute;
+  left: 111px;
+  right: 85px;
+  bottom: 19%;
+  transform: translateY(-50%);
+  height: 1px;
+  background-image: repeating-linear-gradient(90deg, #000, #000 2px, transparent 2px, transparent 4px);
+  z-index: 0;
+}
+
+.main__curr-change-list-item-currency-dots-green {
+  background-image: repeating-linear-gradient(90deg, var(--color-state-success), var(--color-state-success) 2px, transparent 2px, transparent 4px);
+}
+
+.main__curr-change-list-item-currency-dots-red {
+  background-image: repeating-linear-gradient(90deg, var(--color-state-error), var(--color-state-error) 2px, transparent 2px, transparent 4px);
+}
+
+.main__curr-change-list-item-currency-wrap,
+.main__curr-change-list-item-currency-value {
+  font-size: 20px;
+  font-weight: var(--fw-regular);
+  line-height: 23px;
+  color: var(--color-black);
+  background-color: #E5E5E5;
+  z-index: 1;
+}
+
+.main__curr-change-list-item-currency-name {
+  font-size: 20px;
+  font-weight: var(--fw-semibold);
+  line-height: 23px;
+  color: var(--color-black);
+}
+
+.currency-changes-up {
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='10' viewBox='0 0 20 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 10L10 0L0 10L20 10Z' fill='%2376CA66'/%3E%3C/svg%3E%0A");
+}
+
+.currency-changes-down {
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='10' viewBox='0 0 20 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0L10 10L20 0H0Z' fill='%23FD4E5D'/%3E%3C/svg%3E%0A");
+}
+
+/* Банкоматы */
+
+.main__atm-map {
+  display: flex;
+  width: 100%;
+  height: auto;
+  min-height: 728px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Валидация */
+
+.validation__error-message {
+  position: absolute;
+  top: -22px;
+  left: auto;
+  right: 0;
+  color: var(--color-state-error);
+}
